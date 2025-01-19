@@ -7,6 +7,7 @@
 using namespace std;  
 
 //Variables globales
+float movarbusto=0;
 float movnube = -0.8;           //Variable : mover la nube
 float movimientoy[14] = {0.0f}; //Variable : mover los jugadores en y
 bool direcciony[14] = {true};   //Variable : direccion de los jugadores en y
@@ -440,9 +441,9 @@ void campo(float x, float y, float z) {
     rectangulo(0.8, -0.9, 0.5, 1.6, 0, 1, 0);
 
     glPushMatrix();
-    arbusto(-0.85, 0);
+    arbusto(-0.85 + movarbusto, 0);
     glPopMatrix();
-    arbusto(1.2, 0);
+    arbusto(1.2 +movarbusto ,0);
 
     glPopMatrix();
 
@@ -613,6 +614,12 @@ void iniciar() {
 
 //procedimiento para actualizar
 void actualizar() {
+	
+		if (movarbusto < 0.04) {  //movimiento de la nube
+        movarbusto += 0.005;
+    } else {
+        movarbusto = -0.04;
+    }
 	
 	    if (movnube < 1.2) {  //movimiento de la nube
         movnube += 0.01;
